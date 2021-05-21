@@ -13,6 +13,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.7",
+    "@types/redux-actions": "^2.6.1",
     "@types/redux-logger": "^3.0.8",
     "@types/styled-components": "^5.1.9",
     "@typescript-eslint/eslint-plugin": "^4.24.0",

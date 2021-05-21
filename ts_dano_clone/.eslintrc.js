@@ -27,5 +27,13 @@ module.exports = {
         'no-underscore-dangle': 'off',
         'no-param-reassign': 'off',
         '@typescript-eslint/no-empty-function': 'off',
+        'no-alert': 'off',
+        'no-console': 'off',
+        'no-useless-return': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+        'func-names': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        'react/self-closing-comp': 'off',
+        'no-unneeded-ternary': 'off',
     },
 };

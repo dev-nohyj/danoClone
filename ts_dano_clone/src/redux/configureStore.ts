@@ -12,6 +12,8 @@ const rootReducer = combineReducers({
     router: connectRouter(history),
 });
 
+export type RootState = ReturnType<typeof rootReducer>;
+
 const middlewares = [thunk.withExtraArgument({ history })];
 
 const env = process.env.NODE_ENV;

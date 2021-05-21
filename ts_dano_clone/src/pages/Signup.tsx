@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-// import { actionCreators as userActions } from '../redux/modules/user';
+import { actionCreators as userActions } from '../redux/modules/user';
 import { emailCheck, idCheck, phoneNumCheck } from '../shared/common';
 
-function Signup(): JSX.Element {
+function Signup() {
     const dispatch = useDispatch();
-    const [userId, SetUserId] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordCheck, setPasswordCheck] = useState('');
-    const [userName, setUserName] = useState('');
-    const [userEmail, setUserEmail] = useState('');
-    const [phoneNum, setPhoneNum] = useState('');
+    const [userId, SetUserId] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [passwordCheck, setPasswordCheck] = useState<string>('');
+    const [userName, setUserName] = useState<string>('');
+    const [userEmail, setUserEmail] = useState<string>('');
+    const [phoneNum, setPhoneNum] = useState<string>('');
 
-    const signup = () => {
+    const signup = (): void => {
         // 유효성 검증
         if (
             userId === '' ||
@@ -44,10 +44,9 @@ function Signup(): JSX.Element {
         }
         if (!phoneNumCheck(phoneNum)) {
             window.alert('핸드폰 형식이 맞지 않습니다.');
-            // eslint-disable-next-line no-useless-return
             return;
         }
-        // dispatch(userActions.SignupDB(userId, password, userName, userEmail, phoneNum));
+        dispatch(userActions.SignupDB(userId, password, userName, userEmail, phoneNum));
     };
     return (
         <>
