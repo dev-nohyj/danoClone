@@ -6,11 +6,13 @@ import { useDispatch } from 'react-redux';
 import { history } from '../redux/configureStore';
 import { getCookie } from '../shared/Cookie';
 import { actionCreators as userActions } from '../redux/modules/user';
+import UserInfo from '../pages/UserInfo';
 import Signup from '../pages/Signup';
 import Login from '../pages/Login';
 import Main from '../pages/Main';
 import Prepare from '../pages/Prepare';
 import DanoInfo from '../pages/DanoInfo';
+import Mypage from '../pages/Mypage';
 
 function App() {
     const dispatch = useDispatch();
@@ -29,6 +31,8 @@ function App() {
                 <Route path="/user/login" exact component={Login} />
                 <Route path="/prepare" exact component={Prepare} />
                 <Route path="/danoinfo" exact component={DanoInfo} />
+                <Route path="/mypage" exact component={Mypage} />
+                <Route path="/user/mypage/:id" exact component={UserInfo} />
             </ConnectedRouter>
         </>
     );

@@ -1,25 +1,20 @@
 /* eslint-disable no-unused-expressions */
-/* eslint-disable jsx-a11y/mouse-events-have-key-events */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
+
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { history, RootState } from '../redux/configureStore';
 import { getCookie } from '../shared/Cookie';
 import { actionCreators as userActions } from '../redux/modules/user';
-
-interface User {
-    user: null | { username: string; name: string; email: string; phone: string };
-    isLogin: boolean;
-}
+import { UserInfo } from '../type';
 
 function Header() {
     const dispatch = useDispatch();
     const [menu, setMenu] = useState<boolean>(false);
     let menustyle;
     menu ? (menustyle = { display: 'block' }) : (menustyle = { display: 'none' });
-    const user: User = useSelector((state: RootState) => state.user);
-    const username = user.user?.name;
+    const user: UserInfo = useSelector((state: RootState) => state.user);
+    const name = user.user?.name;
     const userLogin = user.isLogin;
     const cookie = getCookie('is_login') ? true : false;
     if (cookie && userLogin) {
@@ -48,7 +43,7 @@ function Header() {
                                     history.push('/mypage');
                                 }}
                             >
-                                {username}님
+                                {name}님
                             </HeaderLi>
                             <HeaderLi
                                 onClick={() => {

@@ -35,5 +35,7 @@ module.exports = {
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         'react/self-closing-comp': 'off',
         'no-unneeded-ternary': 'off',
+        'jsx-a11y/click-events-have-key-events': 'off',
+        'jsx-a11y/mouse-events-have-key-events': 'off',
     },
 };

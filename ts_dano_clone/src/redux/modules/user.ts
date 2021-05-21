@@ -3,25 +3,45 @@ import produce from 'immer';
 import axios from 'axios';
 import { setCookie, deleteCookie, getCookie } from '../../shared/Cookie';
 import { config } from '../../config';
+import { User } from '../../type';
 
-interface User {
-    username: string;
-    name: string;
-    email: string;
-    phone: string;
-}
+const Authorization = 'Authorization';
 
 // 액션
 const GET_USER = 'GET_USER';
 const LOG_OUT = 'LOG_OUT';
+const UPDATE_USER = 'UPDATE_USER';
+const DELETE_USER = 'DELETE_USER';
 
 // 액션 생성 함수
 const getUser = createAction(GET_USER, (user: User) => ({ user }));
 const logOut = createAction(LOG_OUT, () => ({}));
+const updateUser = createAction(UPDATE_USER, (user: User) => ({ user }));
+const deleteUser = createAction(DELETE_USER, () => ({}));
 
 const inititalState: { user: null; isLogin: boolean } = {
     user: null,
     isLogin: false,
+};
+
+// 회원 탈퇴
+// 유저 id를 전송해 DB에 회원 정보를 삭제
+const deleteUserDB = () => {
+    return function (dispatch: any, getState: any, { history }: any) {
+        axios({
+            method: 'delete',
+            url: `${config.api}/api/user`,
+        })
+            .then(() => {
+                dispatch(deleteUser());
+                window.alert('회원탈퇴가 완료되었습니다..😭');
+                // replace를 사용한 이유: 뒤로가기 했을때 회원 정보 수정창이 나오면 비로그인 시 접근 차단은 했지만 사용자 경험이 별로이므로
+                history.replace('/');
+            })
+            .catch((e) => {
+                console.log('에러발생', e);
+            });
+    };
 };
 
 // 회원정보 조회
@@ -29,7 +49,6 @@ const getUserDB = () => {
     return function (dispatch: any) {
         // 토큰 값 조회
         const jwtToken = getCookie('is_login');
-        const Authorization = 'Authorization';
         // 새로고침 하면 헤더 default 날라가므로 다시 헤더에 토큰을 담아줌
         axios.defaults.headers.common[Authorization] = `Bearer ${jwtToken}`;
         axios({
@@ -53,6 +72,38 @@ const getUserDB = () => {
     };
 };
 
+// 회원 정보 수정
+// 변경할 데이터를 서버에 보내줌
+const updateUserDB = (password: string, email: string, phone: string) => {
+    return function (dispatch: any, getState: any, { history }: any) {
+        axios({
+            method: 'put',
+            url: `${config.api}/api/user`,
+            data: {
+                password,
+                email,
+                phone,
+            },
+        })
+            .then((res) => {
+                // 스토어에서도 최신 데이터로 변경
+                dispatch(
+                    updateUser({
+                        username: res.data.userName,
+                        name: res.data.nickName,
+                        email: res.data.email,
+                        phone: res.data.phone,
+                    }),
+                );
+                window.alert('회원정보가 변경되었습니다!');
+                history.replace('/');
+            })
+            .catch((e) => {
+                console.log('에러발생', e);
+            });
+    };
+};
+
 // 로그인
 const LoginDB = (userId: string, password: string) => {
     return function (dispatch: any, getState: any, { history }: any) {
@@ -68,7 +119,6 @@ const LoginDB = (userId: string, password: string) => {
             // 받은 토큰을 쿠키에 저장
             setCookie('is_login', jwtToken);
             // 통신 시 헤더에 default로 저장
-            const Authorization = 'Authorization';
             axios.defaults.headers.common[Authorization] = `Bearer ${jwtToken}`;
             // 로그인 후 회원 정보를 스토어에 최신화
             dispatch(getUserDB());
@@ -121,6 +171,18 @@ export default handleActions(
                 draft.user = null;
                 draft.isLogin = false;
             }),
+        [UPDATE_USER]: (state, action) =>
+            produce(state, (draft) => {
+                draft.user = action.payload.user;
+                draft.isLogin = true;
+            }),
+        [DELETE_USER]: (state) =>
+            produce(state, (draft) => {
+                // 회원 탈퇴 시 쿠키에 담긴 토큰 삭제, 회원정보 비워줌, 로그인 여부 false
+                deleteCookie('is_login');
+                draft.user = null;
+                draft.isLogin = false;
+            }),
     },
     inititalState,
 );
@@ -130,6 +192,8 @@ const actionCreators = {
     LoginDB,
     getUserDB,
     logOut,
+    deleteUserDB,
+    updateUserDB,
 };
 
 export { actionCreators };
