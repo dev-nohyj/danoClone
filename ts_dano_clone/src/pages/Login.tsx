@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { actionCreators as userActions } from '../redux/modules/user';
 
 // 로그인 페이지
-
 function Login(props: { history: any }) {
     const { history } = props;
     const dispatch = useDispatch();

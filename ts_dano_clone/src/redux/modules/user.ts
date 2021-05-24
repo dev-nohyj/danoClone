@@ -114,16 +114,21 @@ const LoginDB = (userId: string, password: string) => {
                 userName: userId,
                 password,
             },
-        }).then((res) => {
-            const jwtToken = res.data;
-            // 받은 토큰을 쿠키에 저장
-            setCookie('is_login', jwtToken);
-            // 통신 시 헤더에 default로 저장
-            axios.defaults.headers.common[Authorization] = `Bearer ${jwtToken}`;
-            // 로그인 후 회원 정보를 스토어에 최신화
-            dispatch(getUserDB());
-            history.push('/');
-        });
+        })
+            .then((res) => {
+                const jwtToken = res.data;
+                // 받은 토큰을 쿠키에 저장
+                setCookie('is_login', jwtToken);
+                // 통신 시 헤더에 default로 저장
+                axios.defaults.headers.common[Authorization] = `Bearer ${jwtToken}`;
+                // 로그인 후 회원 정보를 스토어에 최신화
+                dispatch(getUserDB());
+                history.push('/');
+            })
+            .catch((e) => {
+                window.alert(e.response.data);
+                console.log('에러발생:', e);
+            });
     };
 };
 
