@@ -37,5 +37,8 @@ module.exports = {
         'no-unneeded-ternary': 'off',
         'jsx-a11y/click-events-have-key-events': 'off',
         'jsx-a11y/mouse-events-have-key-events': 'off',
+        radix: 'off',
+        'jsx-a11y/no-static-element-interactions': 'off',
+        'react/destructuring-assignment': 'off',
     },
 };

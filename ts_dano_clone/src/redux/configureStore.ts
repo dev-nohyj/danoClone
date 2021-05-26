@@ -4,10 +4,16 @@ import { createBrowserHistory } from 'history';
 import { connectRouter } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
 import user from './modules/user';
+import product from './modules/product';
+import order from './modules/order';
+import cart from './modules/cart';
 
 export const history = createBrowserHistory();
 // 리듀서 합치기
 const rootReducer = combineReducers({
+    cart,
+    order,
+    product,
     user,
     router: connectRouter(history),
 });

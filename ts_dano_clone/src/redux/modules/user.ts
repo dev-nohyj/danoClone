@@ -3,7 +3,7 @@ import produce from 'immer';
 import axios from 'axios';
 import { setCookie, deleteCookie, getCookie } from '../../shared/Cookie';
 import { config } from '../../config';
-import { User } from '../../type';
+import { User, UserInfo } from '../../type';
 
 const Authorization = 'Authorization';
 
@@ -19,7 +19,7 @@ const logOut = createAction(LOG_OUT, () => ({}));
 const updateUser = createAction(UPDATE_USER, (user: User) => ({ user }));
 const deleteUser = createAction(DELETE_USER, () => ({}));
 
-const inititalState: { user: null; isLogin: boolean } = {
+const inititalState: UserInfo = {
     user: null,
     isLogin: false,
 };

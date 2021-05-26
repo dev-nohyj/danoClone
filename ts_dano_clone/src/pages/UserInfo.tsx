@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/configureStore';
-import { User } from '../type';
+
 import Header from '../components/Header';
 import DeleteModal from '../components/DeleteModal';
 import Footer from '../components/Footer';
