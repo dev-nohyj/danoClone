@@ -3,6 +3,7 @@ import produce from 'immer';
 import axios from 'axios';
 import { config } from '../../config';
 import { ProductItem } from '../../type';
+import { getCookie } from '../../shared/Cookie';
 
 // 액션
 const GET_ORDER = 'GET_ORDER';
@@ -19,8 +20,8 @@ const initialState: { list: ProductItem[] } = {
 // 구매 내역 조회
 // 유저가 장바구니나 디테일페이지에서 구매버튼을 클릭한 데이터를 전부 조회
 const getOrderDB = () => {
-    return function (dispatch: any, getState: any) {
-        if (!getState().user.user) {
+    return function (dispatch: any) {
+        if (!getCookie('is_login')) {
             dispatch(getOrder([]));
             return;
         }
