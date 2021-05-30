@@ -7,6 +7,7 @@
 - 개발 기간: 2021.05.17 ~ 2021.05.21
 - 클라이언트: React, 서버: spring-boot 사용
 - 형상관리 툴: git
+- 리펙토링 전 프로젝트 링크: https://github.com/noh-yj/dano-clone
 <hr/>
 <br/>
 
