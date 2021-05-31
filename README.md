@@ -24,8 +24,10 @@
 - product: {productId, imageUrl, title, price}
 - cart: {cartId, imageUrl, title, price, amount}
 - order: {productId, imageUrl, title, price, amount}
+
 <hr/>
 <br/>
+<br>
 
 ## 상태관리 패키지
 
