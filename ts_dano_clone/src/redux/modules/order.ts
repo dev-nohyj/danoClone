@@ -57,6 +57,7 @@ const addOrderDB = (orderItem: { productId: number | undefined; amount: number }
                 history.push('/purchase');
             })
             .catch((e) => {
+                window.alert('상품 구매에 실패했습니다. 😭');
                 console.log('에러발생', e);
             });
     };

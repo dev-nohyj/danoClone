@@ -58,13 +58,15 @@ const getItemOneDB = (id: string) => {
         axios({
             method: 'get',
             url: `${config.api}/api/product/all`,
-        }).then((res) => {
-            // 전체 리스트 중 특정 제품 하나 필터처리
-            const item = res.data.filter((val: ProductItem) => {
-                return val.productId === parseInt(id);
-            });
-            dispatch(getItems(item));
-        });
+        })
+            .then((res) => {
+                // 전체 리스트 중 특정 제품 하나 필터처리
+                const item = res.data.filter((val: ProductItem) => {
+                    return val.productId === parseInt(id);
+                });
+                dispatch(getItems(item));
+            })
+            .catch((e) => console.log(e));
     };
 };
 

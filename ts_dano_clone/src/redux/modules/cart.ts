@@ -30,11 +30,16 @@ const buyCartDB = () => {
         axios({
             method: 'post',
             url: `${config.api}/api/cart/order`,
-        }).then(() => {
-            window.alert('구매가 완료되었습니다! 😍');
-            history.push('/Purchase');
-            dispatch(buyCart());
-        });
+        })
+            .then(() => {
+                dispatch(buyCart());
+                window.alert('구매가 완료되었습니다! 😍');
+                history.push('/Purchase');
+            })
+            .catch((e) => {
+                window.alert('상품을 구매하는데 실패했습니다 😭');
+                console.log(e);
+            });
     };
 };
 
@@ -50,6 +55,7 @@ const deleteCartDB = (cartId: number | undefined) => {
                 dispatch(deleteCart(cartId));
             })
             .catch((e) => {
+                window.alert('상품을 삭제하는데 실패했습니다 😭');
                 console.log('에러발생:', e);
             });
     };
@@ -93,6 +99,7 @@ const addCartDB = (cartItem: { productId: number | undefined; count: number }) =
                 history.push('/cart');
             })
             .catch((e) => {
+                window.alert('장바구니에 추가하는데 실패했습니다 😭');
                 console.log('에러발생:', e);
             });
     };
