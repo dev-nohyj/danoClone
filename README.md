@@ -7,7 +7,6 @@
 - 개발 기간: 2021.05.17 ~ 2021.05.21
 - 클라이언트: React, 서버: spring-boot 사용
 - 형상관리 툴: git
-- 리펙토링 전 프로젝트 링크: https://github.com/noh-yj/dano-clone
 - <a href="https://www.youtube.com/watch?v=MMWfqYu-sW8" target="_blank">Youtube 시연영상</a>
 <hr/>
 <br/>
@@ -15,7 +14,6 @@
 ## 프로젝트 특징
 
 - 본 프로젝트는 팀 프로젝트로 특정 웹사이트(다노샵)를 선정하여 클론코딩을 진행함
-- 타입스크립트를 이용해서 기존 다노 클론코딩 프로젝트를 리펙토링함
 - UI 부분은 styled-components, material-ui, react-bootstrap(캐러셀)을 사용
 - 컴포넌트 구성: 컴포넌트는 중간단위 및 페이지 단위로 구성했으며 디렉토리로 구분함
 - 주요 기능: 로그인, 회원가입, 회원정보 수정 및 탈퇴, 장바구니 추가, 삭제, 조회, 주문내역 추가, 조회, 상품 조회 등
